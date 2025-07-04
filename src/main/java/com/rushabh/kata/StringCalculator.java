@@ -9,8 +9,8 @@ public class StringCalculator {
      */
 
     public int add(String numbers) {
-        // If the input string is empty, we follow the first rule.
-        if (numbers.isEmpty()) {
+        // Add the null check BEFORE we try to call any methods on 'numbers'
+        if (numbers == null || numbers.isEmpty()) {
             return 0;
         }
         // Otherwise, we assume it's a single number.
