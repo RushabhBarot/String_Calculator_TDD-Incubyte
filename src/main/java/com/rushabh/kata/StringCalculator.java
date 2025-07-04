@@ -9,6 +9,12 @@ public class StringCalculator {
      */
 
     public int add(String numbers) {
-        return 0; // The simplest code to make the first test pass
+        // If the input string is empty, we follow the first rule.
+        if (numbers.isEmpty()) {
+            return 0;
+        }
+        // Otherwise, we assume it's a single number.
+        return Integer.parseInt(numbers);
     }
+
 }
