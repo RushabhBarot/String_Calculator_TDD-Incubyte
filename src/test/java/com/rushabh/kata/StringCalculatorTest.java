@@ -66,4 +66,19 @@ public class StringCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("Should return the sum of any amount of comma-separated numbers")
+    void testAdd_shouldReturnSum_forAnyAmountOfNumbers() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = "1,2,3,4,5";
+        int expected = 15;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }
