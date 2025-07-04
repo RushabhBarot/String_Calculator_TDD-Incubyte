@@ -51,4 +51,19 @@ public class StringCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("Should return the sum of two comma-separated numbers")
+    void testAdd_shouldReturnSum_forTwoNumbers() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = "1,5";
+        int expected = 6;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }
