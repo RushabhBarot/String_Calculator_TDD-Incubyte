@@ -36,4 +36,19 @@ public class StringCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("Should return 0 for a null string")
+    void testAdd_shouldReturnZero_forNullInput() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = null;
+        int expected = 0;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }
