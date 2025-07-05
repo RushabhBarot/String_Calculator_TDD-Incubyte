@@ -96,4 +96,20 @@ public class StringCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("Should support a custom delimiter specified at the start of the string")
+    void testAdd_shouldSupportCustomDelimiter() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = "//;\n1;2";
+        int expected = 3;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+    }
+
 }
