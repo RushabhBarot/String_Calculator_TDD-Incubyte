@@ -175,4 +175,20 @@ public class StringCalculatorTest {
         assertEquals(2, calculator.add("1001,2"), "1001 should be ignored");
         assertEquals(1002, calculator.add("1000,2"), "1000 should not be ignored");
     }
+
+    @Test
+    @DisplayName("Should support delimiters of any length defined in brackets")
+    void testAdd_shouldSupportAnyLengthDelimiter() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+
+        String input = "//[***]\n1***2***3";
+        int expected = 6;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }
