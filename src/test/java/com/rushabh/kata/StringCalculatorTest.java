@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
@@ -112,4 +113,19 @@ public class StringCalculatorTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    @DisplayName("Should throw an exception for a single negative number")
+    void testAdd_shouldThrowException_forNegativeNumber() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = "1,-2,3";
+        String expectedMessage = "negative numbers not allowed: -2";
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add(input);
+        });
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
 }
