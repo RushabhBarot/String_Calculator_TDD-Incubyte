@@ -1,5 +1,6 @@
 package com.rushabh.kata;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
+    private StringCalculator calculator;
+
+    // This method runs before each test, ensuring a fresh calculator instance.
+    @BeforeEach
+    void setUp() {
+        calculator = new StringCalculator();
+    }
+
     @Test
     @DisplayName("Should return 0 for an empty string")
     void testAdd_shouldReturnZero_forEmptyString() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "";
         int expected = 0;
 
@@ -27,7 +35,6 @@ public class StringCalculatorTest {
     @DisplayName("Should return the number itself for a single number string")
     void testAdd_shouldReturnNumber_forSingleNumber() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "1";
         int expected = 1;
 
@@ -42,7 +49,6 @@ public class StringCalculatorTest {
     @DisplayName("Should return 0 for a null string")
     void testAdd_shouldReturnZero_forNullInput() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = null;
         int expected = 0;
 
@@ -57,7 +63,6 @@ public class StringCalculatorTest {
     @DisplayName("Should return the sum of two comma-separated numbers")
     void testAdd_shouldReturnSum_forTwoNumbers() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "1,5";
         int expected = 6;
 
@@ -72,7 +77,6 @@ public class StringCalculatorTest {
     @DisplayName("Should return the sum of any amount of comma-separated numbers")
     void testAdd_shouldReturnSum_forAnyAmountOfNumbers() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "1,2,3,4,5";
         int expected = 15;
 
@@ -87,7 +91,6 @@ public class StringCalculatorTest {
     @DisplayName("Should handle new lines as a delimiter between numbers")
     void testAdd_shouldHandleNewlines_asDelimiter() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "1\n2,3";
         int expected = 6;
 
@@ -102,7 +105,6 @@ public class StringCalculatorTest {
     @DisplayName("Should support a custom delimiter specified at the start of the string")
     void testAdd_shouldSupportCustomDelimiter() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "//;\n1;2";
         int expected = 3;
 
@@ -117,7 +119,6 @@ public class StringCalculatorTest {
     @DisplayName("Should throw an exception for a single negative number")
     void testAdd_shouldThrowException_forNegativeNumber() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "1,-2,3";
         String expectedMessage = "negative numbers not allowed: -2";
 
@@ -133,7 +134,6 @@ public class StringCalculatorTest {
     @DisplayName("Should throw an exception showing all negative numbers in the message")
     void testAdd_shouldThrowException_listingAllNegativeNumbers() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
         String input = "1,-2,-5,3";
         String expectedMessage = "negative numbers not allowed: -2,-5";
 
@@ -148,8 +148,6 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("GetCalledCount should return the number of times add() was invoked")
     void testGetCalledCount_shouldReturnTotalInvocations() {
-        // Arrange
-        StringCalculator calculator = new StringCalculator();
 
         // Act & Assert
         assertEquals(0, calculator.GetCalledCount(), "Count should be 0 initially.");
@@ -168,9 +166,6 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("Numbers bigger than 1000 should be ignored")
     void testAdd_shouldIgnoreNumbersGreaterThan1000() {
-        // Arrange
-        StringCalculator calculator = new StringCalculator();
-
         //Act & Arrange
         assertEquals(2, calculator.add("1001,2"), "1001 should be ignored");
         assertEquals(1002, calculator.add("1000,2"), "1000 should not be ignored");
@@ -179,9 +174,7 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("Should support delimiters of any length defined in brackets")
     void testAdd_shouldSupportAnyLengthDelimiter() {
-        // Arrange
-        StringCalculator calculator = new StringCalculator();
-
+       // Arrange
         String input = "//[***]\n1***2***3";
         int expected = 6;
 
@@ -196,8 +189,6 @@ public class StringCalculatorTest {
     @DisplayName("Should support multiple delimiters of any length")
     void testAdd_shouldSupportMultipleDelimiters() {
         // Arrange
-        StringCalculator calculator = new StringCalculator();
-
         String input = "//[*][%]\n1*2%3";
         int expected = 6;
 
