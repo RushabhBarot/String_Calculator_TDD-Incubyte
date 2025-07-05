@@ -164,4 +164,15 @@ public class StringCalculatorTest {
         assertThrows(IllegalArgumentException.class, () -> calculator.add("-1"));
         assertEquals(3, calculator.GetCalledCount(), "Count should be 3 after a call that throws.");
     }
+
+    @Test
+    @DisplayName("Numbers bigger than 1000 should be ignored")
+    void testAdd_shouldIgnoreNumbersGreaterThan1000() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+
+        //Act & Arrange
+        assertEquals(2, calculator.add("1001,2"), "1001 should be ignored");
+        assertEquals(1002, calculator.add("1000,2"), "1000 should not be ignored");
+    }
 }
