@@ -1,16 +1,21 @@
 package com.rushabh.kata;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StringCalculator {
+
+
+
+    // This constant clearly defines the standard separators we support.
+    private static final String DEFAULT_DELIMITERS_REGEX = ",|\n";
 
     /**
      * Takes a string of numbers and returns their sum.
      * @param numbers The input string of numbers.
      * @return The sum as an integer.
      */
-
-    // This constant clearly defines the standard separators we support.
-    private static final String DEFAULT_DELIMITERS_REGEX = ",|\n";
-
     public int add(String numbers) {
 
         // Add the null check BEFORE we try to call any methods on 'numbers'
@@ -21,12 +26,27 @@ public class StringCalculator {
         // The logic for splitting the string is now isolated.
         String[] numberArray = splitNumbers(numbers);
 
-        int sum = 0;
-        for (String numStr : numberArray) {
-            // Convert each part to an integer and add to the sum
-            sum += Integer.parseInt(numStr.trim());
+        // Convert string array to a list of integers
+        List<Integer> intList = Arrays.stream(numberArray)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .toList();
+
+        // Find all negative numbers
+        List<Integer> negativeNumbers = intList.stream()
+                .filter(n -> n < 0)
+                .toList();
+
+        // If there are any negative numbers, throw an exception
+        if (!negativeNumbers.isEmpty()) {
+            throw new IllegalArgumentException("negative numbers not allowed: " +
+                    negativeNumbers.stream()
+                            .map(String::valueOf)
+                            .collect(Collectors.joining(",")));
         }
-        return sum;
+
+        // If no negatives, return the sum
+        return intList.stream().mapToInt(Integer::intValue).sum();
     }
 
     /**
