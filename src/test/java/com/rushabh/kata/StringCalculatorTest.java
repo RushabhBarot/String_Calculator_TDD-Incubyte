@@ -144,4 +144,24 @@ public class StringCalculatorTest {
 
         assertEquals(expectedMessage, exception.getMessage());
     }
+
+    @Test
+    @DisplayName("GetCalledCount should return the number of times add() was invoked")
+    void testGetCalledCount_shouldReturnTotalInvocations() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+
+        // Act & Assert
+        assertEquals(0, calculator.GetCalledCount(), "Count should be 0 initially.");
+
+        calculator.add("");
+        assertEquals(1, calculator.GetCalledCount(), "Count should be 1 after one call.");
+
+        calculator.add("1,2");
+        assertEquals(2, calculator.GetCalledCount(), "Count should be 2 after two calls.");
+
+        // Even calls that throw exceptions should be counted
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("-1"));
+        assertEquals(3, calculator.GetCalledCount(), "Count should be 3 after a call that throws.");
+    }
 }
