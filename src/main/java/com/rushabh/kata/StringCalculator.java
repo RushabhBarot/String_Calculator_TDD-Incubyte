@@ -18,14 +18,39 @@ public class StringCalculator {
             return 0;
         }
 
-        // Split the string by the comma delimiter or newline
-        String[] numberArray = numbers.split(DEFAULT_DELIMITERS_REGEX);
+        // The logic for splitting the string is now isolated.
+        String[] numberArray = splitNumbers(numbers);
+
         int sum = 0;
         for (String numStr : numberArray) {
             // Convert each part to an integer and add to the sum
             sum += Integer.parseInt(numStr.trim());
         }
         return sum;
+    }
+
+    /**
+     * This private helper method is responsible ONLY for splitting the input string
+     * into an array of number strings, handling both default and custom delimiters.
+     * @param numbers The raw input string.
+     * @return An array of strings, each representing a number.
+     */
+    private String[] splitNumbers(String numbers) {
+        String numbersPart = numbers;
+        String delimiters = DEFAULT_DELIMITERS_REGEX;
+
+        if (numbers.startsWith("//")) {
+            int newlineIndex = numbers.indexOf('\n');
+
+            // The delimiter can be found between "//" and the newline.
+            String customDelimiter = numbers.substring(2, newlineIndex);
+            delimiters = customDelimiter;
+
+            // The actual numbers are after the newline.
+            numbersPart = numbers.substring(newlineIndex + 1);
+        }
+
+        return numbersPart.split(delimiters);
     }
 
 }
