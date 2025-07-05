@@ -14,8 +14,8 @@ public class StringCalculator {
             return 0;
         }
 
-        // Split the string by the comma delimiter
-        String[] numberArray = numbers.split(",");
+        // Split the string by the comma delimiter or newline
+        String[] numberArray = numbers.split(",|\n");
         int sum = 0;
         for (String numStr : numberArray) {
             // Convert each part to an integer and add to the sum
