@@ -18,13 +18,18 @@ public class Application {
             System.out.print("> ");
             String input = scanner.nextLine();
 
+            // Before passing the input to the calculator, we replace any literal '\n'
+            // sequences typed by the user with the actual newline character that the
+            // calculator expects. This makes the command-line interface more intuitive.
+            String processedInput = input.replace("\\n", "\n");
+
             if ("exit".equalsIgnoreCase(input)) {
                 break;
             }
 
             try {
-                // Use the calculator to do the work.
-                int result = calculator.add(input);
+                // Pass the PROCESSED input to the calculator.
+                int result = calculator.add(processedInput);
                 System.out.println("The sum is: " + result);
             } catch (IllegalArgumentException e) {
                 // Gracefully handle exceptions from the calculator.
