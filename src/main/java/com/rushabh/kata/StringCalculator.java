@@ -9,12 +9,19 @@ public class StringCalculator {
     // This constant clearly defines the standard separators we support.
     private static final String DEFAULT_DELIMITERS_REGEX = ",|\n";
 
+    private int addCallCount = 0; // Add a private field to hold state
+
+    public int GetCalledCount() {
+        return this.addCallCount;
+    }
     /**
      * Takes a string of numbers and returns their sum.
      * @param numbers The input string of numbers.
      * @return The sum as an integer.
      */
     public int add(String numbers) {
+
+        this.addCallCount++; // Increment the counter at the start of every call
 
         // Add the null check BEFORE we try to call any methods on 'numbers'
         if (numbers == null || numbers.isEmpty()) {
