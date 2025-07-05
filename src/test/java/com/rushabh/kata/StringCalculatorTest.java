@@ -81,4 +81,19 @@ public class StringCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("Should handle new lines as a delimiter between numbers")
+    void testAdd_shouldHandleNewlines_asDelimiter() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = "1\n2,3";
+        int expected = 6;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }
