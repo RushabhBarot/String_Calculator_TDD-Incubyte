@@ -191,4 +191,30 @@ public class StringCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("Should support multiple delimiters of any length")
+    void testAdd_shouldSupportMultipleDelimiters() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+
+        String input = "//[*][%]\n1*2%3";
+        int expected = 6;
+
+        // Act
+        int result = calculator.add(input);
+
+        // Assert
+        assertEquals(expected, result);
+
+        // Also test the "any length" part of this requirement
+        //Arrange
+        input = "//[**][%%]\n1**2%%3";
+
+        // Act
+        result = calculator.add(input);
+
+        //Assert
+        assertEquals(expected, result);
+    }
 }
