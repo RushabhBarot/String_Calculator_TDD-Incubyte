@@ -128,4 +128,20 @@ public class StringCalculatorTest {
 
         assertEquals(expectedMessage, exception.getMessage());
     }
+
+    @Test
+    @DisplayName("Should throw an exception showing all negative numbers in the message")
+    void testAdd_shouldThrowException_listingAllNegativeNumbers() {
+        // Arrange
+        StringCalculator calculator = new StringCalculator();
+        String input = "1,-2,-5,3";
+        String expectedMessage = "negative numbers not allowed: -2,-5";
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add(input);
+        });
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
 }
