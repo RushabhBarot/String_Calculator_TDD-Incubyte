@@ -51,7 +51,10 @@ public class StringCalculator {
         }
 
         // If no negatives, return the sum
-        return intList.stream().mapToInt(Integer::intValue).sum();
+        return intList.stream()
+                .filter(n -> n <= 1000)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     /**
