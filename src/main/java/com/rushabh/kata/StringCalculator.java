@@ -2,6 +2,7 @@ package com.rushabh.kata;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
@@ -69,10 +70,20 @@ public class StringCalculator {
 
         if (numbers.startsWith("//")) {
             int newlineIndex = numbers.indexOf('\n');
-
             // The delimiter can be found between "//" and the newline.
-            String customDelimiter = numbers.substring(2, newlineIndex);
-            delimiters = customDelimiter;
+            String delimiterDefinition = numbers.substring(2, newlineIndex);
+
+            // Check for the new bracketed format
+            if (delimiterDefinition.startsWith("[") && delimiterDefinition.endsWith("]")) {
+                // Extract the content from between the brackets
+                String customDelimiter = delimiterDefinition.substring(1, delimiterDefinition.length() - 1);
+                // Quote the delimiter to treat it as a literal string, not a regex
+                delimiters = Pattern.quote(customDelimiter);
+            } else {
+                // Keep the old logic for the previous format (e.g., //;\n...)
+                // and make it safe with Pattern.quote()
+                delimiters = Pattern.quote(delimiterDefinition);
+            }
 
             // The actual numbers are after the newline.
             numbersPart = numbers.substring(newlineIndex + 1);
