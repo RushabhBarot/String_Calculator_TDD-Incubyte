@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 
-
-
     // This constant clearly defines the standard separators we support.
     private static final String DEFAULT_DELIMITERS_REGEX = ",|\n";
 
